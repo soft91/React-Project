@@ -1,5 +1,7 @@
 import React from 'react';
-import AddCommentIcon from '@material-ui/icons/AddComment';
+import Fab from '@material-ui/core/Fab';
+import AddIcon from '@material-ui/icons/Add';
+import AddMemo from './AddMemo';
 import "./Container.css";
 
 export default class Container extends React.Component {
@@ -7,20 +9,32 @@ export default class Container extends React.Component {
         super(props);
 
         this.state = {
-            listbox : []
+            listbox : [],
+            showPopup: false
         }
 
-        this.addMemo = this.addMemo.bind(this);
+        this.togglePopup = this.togglePopup.bind(this);
     }
 
-    addMemo(){
-        console.log('Test');
+    togglePopup() {
+        this.setState({
+            showPopup: !this.state.showPopup
+        });
     }
 
     render(){
         return(
             <div className = "containerStyle">
-                <AddCommentIcon fontSize = "large" onClick = {this.addMemo}></AddCommentIcon>
+                <Fab color="primary" aria-label="add">
+                    <AddIcon onClick = {this.togglePopup}/>
+                </Fab>
+                {this.state.showPopup ? 
+                    <AddMemo
+                        text='Close Me'
+                        closePopup={this.togglePopup}
+                    />
+                    : null
+                }
             </div>
         )
     }
