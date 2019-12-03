@@ -20,6 +20,8 @@ export default class Container extends React.Component {
         this.setState({
             showPopup: !this.state.showPopup
         });
+        
+        console.log(this.state.showPopup);
     }
 
     render(){
@@ -28,13 +30,7 @@ export default class Container extends React.Component {
                 <Fab color="primary" aria-label="add">
                     <AddIcon onClick = {this.togglePopup}/>
                 </Fab>
-                {this.state.showPopup ? 
-                    <AddMemo
-                        text='Close Me'
-                        closePopup={this.togglePopup}
-                    />
-                    : null
-                }
+                { this.state.showPopup ? <AddMemo open = {this.state.showPopup}/> : null }
             </div>
         )
     }
