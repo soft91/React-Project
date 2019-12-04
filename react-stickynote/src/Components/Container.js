@@ -9,28 +9,28 @@ export default class Container extends React.Component {
         super(props);
 
         this.state = {
-            listbox : [],
             showPopup: false
         }
+
+        console.log(`init showPopup : ${this.state.showPopup}`)
 
         this.togglePopup = this.togglePopup.bind(this);
     }
 
     togglePopup() {
-        this.setState({
+        this.setState({ 
             showPopup: !this.state.showPopup
         });
-        
-        console.log(this.state.showPopup);
+        console.log(`showPopup : ${this.state.showPopup}`)
     }
 
     render(){
         return(
             <div className = "containerStyle">
                 <Fab color="primary" aria-label="add">
-                    <AddIcon onClick = {this.togglePopup}/>
+                    <AddIcon onClick = {this.togglePopup} />
                 </Fab>
-                { this.state.showPopup ? <AddMemo open = {this.state.showPopup}/> : null }
+                { this.state.showPopup ? <AddMemo open = {this.state.showPopup} /> : null }
             </div>
         )
     }
