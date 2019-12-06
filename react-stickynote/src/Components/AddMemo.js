@@ -31,7 +31,7 @@ export default class AddMemo extends React.Component {
               type="email"
               fullWidth
             />
-            <TextareaAutosize style = {{width:'100%'}} aria-label="minimum height" rows={3} placeholder="내용을 입력하세요." />
+            <TextareaAutosize style = {{width:'100%'}} aria-label="minimum height" rows={10} placeholder="내용을 입력하세요." />
           </DialogContent>
           <DialogActions>
               <Button variant = "contained" color = "primary" onClick={handleClose} startIcon={<SaveIcon />}>
