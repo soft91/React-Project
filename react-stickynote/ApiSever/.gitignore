@@ -1,4 +1,4 @@
 node_modules
 
 # database
-/database.json
+/config/database.js
