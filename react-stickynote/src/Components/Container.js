@@ -17,6 +17,16 @@ export default class Container extends React.Component {
         this.togglePopup = this.togglePopup.bind(this);
     }
 
+    componentDidMount(){
+        fetch('http://localhost:4000/')
+            .then(response => response.text())
+            .then(text => {
+                console.log(text);
+            }).catch(err => {
+            console.error('fetch failed', err);
+        });
+    }
+
     togglePopup() {
         this.setState({ 
             showPopup: !this.state.showPopup

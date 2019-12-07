@@ -16,8 +16,19 @@ app.get('/', function(req, res){
   connection.query('SELECT * from memo', function(err, rows) {
     if(err) throw err;
 
-    console.log('The solution is: ', rows);
     res.send(rows);
+  });
+});
+
+app.get('/add:data', function(req, res){
+  debugger;
+  connection.query('insert into memo(title,content) values (?,?)', req, function(err, rows){
+    if(err){
+      console.log(err);
+    }else{
+      console.log(rows.insertId);
+      res.send('complete');
+    }
   });
 });
 

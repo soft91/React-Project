@@ -11,17 +11,39 @@ export default class AddMemo extends React.Component {
   constructor(props){
     super(props);
     this.state = {open: this.props.open}
+
+    this.addMemo = this.addMemo.bind(this);
+    this.handleClose = this.handleClose.bind(this);
   }
 
-  render(){
-    const handleClose = () => {
-      this.setState({
-        open : !this.props.open
-      })
+  addMemo(){
+    const params = {
+      title : document.getElementById('title').value,
+      content : document.getElementById('content').value
     };
+
+    fetch(`http://localhost:4000/add?data=${params}`)
+      .then(response => response.text())
+      .then(text => {        
+        console.log(text);
+        this.setState({
+          open : !this.props.open
+        })
+      }).catch(err => {
+      console.error('fetch failed', err);
+    });
+  }
+  
+  handleClose(){
+    this.setState({
+      open : !this.props.open
+    })
+  };
+
+  render(){
     return (
       <div>
-        <Dialog open={this.state.open} onClose={handleClose} aria-labelledby="form-dialog-title">
+        <Dialog open={this.state.open} onClose={this.handleClose} aria-labelledby="form-dialog-title">
           <DialogContent>
             <TextField
               autoFocus
@@ -31,13 +53,13 @@ export default class AddMemo extends React.Component {
               type="email"
               fullWidth
             />
-            <TextareaAutosize style = {{width:'100%'}} aria-label="minimum height" rows={10} placeholder="내용을 입력하세요." />
+            <TextareaAutosize id = "content" style = {{width:'100%'}} aria-label="minimum height" rows={10} placeholder="내용을 입력하세요." />
           </DialogContent>
           <DialogActions>
-              <Button variant = "contained" color = "primary" onClick={handleClose} startIcon={<SaveIcon />}>
+              <Button variant = "contained" color = "primary" onClick={this.addMemo} startIcon={<SaveIcon />}>
                   저장
               </Button>
-              <Button variant = "contained" color = "secondary" onClick={handleClose}>
+              <Button variant = "contained" color = "secondary" onClick={this.handleClose}>
                   취소
               </Button>
           </DialogActions>
