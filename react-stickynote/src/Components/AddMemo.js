@@ -6,6 +6,7 @@ import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import SaveIcon from '@material-ui/icons/Save';
+import axios from 'axios';
 
 export default class AddMemo extends React.Component {
   constructor(props){
@@ -16,24 +17,23 @@ export default class AddMemo extends React.Component {
     this.handleClose = this.handleClose.bind(this);
   }
 
+  // 메모내용 DB 추가
   addMemo(){
-    const params = {
+    axios.post('http://localhost:4000/add', {
       title : document.getElementById('title').value,
       content : document.getElementById('content').value
-    };
-
-    fetch(`http://localhost:4000/add?data=${params}`)
-      .then(response => response.text())
-      .then(text => {        
-        console.log(text);
+    })
+      .then(response => {        
+        console.log(response);
         this.setState({
           open : !this.props.open
         })
       }).catch(err => {
-      console.error('fetch failed', err);
-    });
+        console.error('fetch failed', err);
+      });
   }
   
+  // 창 닫기
   handleClose(){
     this.setState({
       open : !this.props.open
@@ -41,6 +41,8 @@ export default class AddMemo extends React.Component {
   };
 
   render(){
+
+    console.log(this.state.open);
     return (
       <div>
         <Dialog open={this.state.open} onClose={this.handleClose} aria-labelledby="form-dialog-title">

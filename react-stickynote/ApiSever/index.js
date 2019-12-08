@@ -12,17 +12,17 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
 app.get('/', function(req, res){
-
-  connection.query('SELECT * from memo', function(err, rows) {
+  connection.query('SELECT * FROM memo', function(err, rows) {
     if(err) throw err;
 
     res.send(rows);
   });
 });
 
-app.get('/add:data', function(req, res){
-  debugger;
-  connection.query('insert into memo(title,content) values (?,?)', req, function(err, rows){
+app.post('/add', function(req, res){
+  const parmas = [req.body.title, req.body.content];
+
+  connection.query('INSERT INTO memo(title,content) VALUES(?,?)', parmas, function(err, rows){
     if(err){
       console.log(err);
     }else{
