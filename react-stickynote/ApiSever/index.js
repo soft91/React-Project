@@ -22,14 +22,12 @@ app.get('/', function(req, res){
 app.post('/add', function(req, res){
   const parmas = [req.body.title, req.body.content];
 
-  console.log(parmas);
-
   connection.query('INSERT INTO memo(title,content) VALUES(?,?)', parmas, function(err, rows){
     if(err){
       console.log(err);
     }else{
       console.log(rows.insertId);
-      res.send('complete');
+      res.send('Insert Complete');
     }
   });
 });

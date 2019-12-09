@@ -11,12 +11,6 @@ import axios from 'axios';
 export default class AddMemo extends React.Component {
   constructor(props){
     super(props);
-    this.state = {
-      open: this.props.open,
-      close: this.props.close
-    }
-
-    console.log(this.state.open);
 
     this.addMemo = this.addMemo.bind(this);
   }
@@ -28,11 +22,9 @@ export default class AddMemo extends React.Component {
       content : document.getElementById('content').value
     })
       .then(response => {
-        console.log(response);
-        this.setState({
-          open : !this.state.open
-        })
-      }).catch(err => {
+        console.log(response.data);
+        this.props.close();
+       }).catch(err => {
         console.error('fetch failed', err);
       });
   }
@@ -40,7 +32,7 @@ export default class AddMemo extends React.Component {
   render(){
     return (
       <div>
-        <Dialog open={this.state.open} onClose={this.state.close} aria-labelledby="form-dialog-title">
+        <Dialog open={this.props.open} aria-labelledby="form-dialog-title">
           <DialogContent>
             <TextField
               autoFocus
@@ -56,7 +48,7 @@ export default class AddMemo extends React.Component {
               <Button variant = "contained" color = "primary" onClick={this.addMemo} startIcon={<SaveIcon />}>
                   저장
               </Button>
-              <Button variant = "contained" color = "secondary" onClick={this.state.close}>
+              <Button variant = "contained" color = "secondary" onClick={this.props.close}>
                   취소
               </Button>
           </DialogActions>
