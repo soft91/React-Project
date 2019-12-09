@@ -11,10 +11,14 @@ import axios from 'axios';
 export default class AddMemo extends React.Component {
   constructor(props){
     super(props);
-    this.state = {open: this.props.open}
+    this.state = {
+      open: this.props.open,
+      close: this.props.close
+    }
+
+    console.log(this.state.open);
 
     this.addMemo = this.addMemo.bind(this);
-    this.handleClose = this.handleClose.bind(this);
   }
 
   // 메모내용 DB 추가
@@ -23,29 +27,20 @@ export default class AddMemo extends React.Component {
       title : document.getElementById('title').value,
       content : document.getElementById('content').value
     })
-      .then(response => {        
+      .then(response => {
         console.log(response);
         this.setState({
-          open : !this.props.open
+          open : !this.state.open
         })
       }).catch(err => {
         console.error('fetch failed', err);
       });
   }
-  
-  // 창 닫기
-  handleClose(){
-    this.setState({
-      open : !this.props.open
-    })
-  };
 
   render(){
-
-    console.log(this.state.open);
     return (
       <div>
-        <Dialog open={this.state.open} onClose={this.handleClose} aria-labelledby="form-dialog-title">
+        <Dialog open={this.state.open} onClose={this.state.close} aria-labelledby="form-dialog-title">
           <DialogContent>
             <TextField
               autoFocus
@@ -61,7 +56,7 @@ export default class AddMemo extends React.Component {
               <Button variant = "contained" color = "primary" onClick={this.addMemo} startIcon={<SaveIcon />}>
                   저장
               </Button>
-              <Button variant = "contained" color = "secondary" onClick={this.handleClose}>
+              <Button variant = "contained" color = "secondary" onClick={this.state.close}>
                   취소
               </Button>
           </DialogActions>

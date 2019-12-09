@@ -10,10 +10,11 @@ export default class Container extends React.Component {
         super(props);
 
         this.state = {
-            showPopup: false
+            show: false
         }
 
-        this.togglePopup = this.togglePopup.bind(this);
+        this.showPopup = this.showPopup.bind(this);
+        this.hidePopup = this.hidePopup.bind(this);
     }
 
     componentDidMount(){
@@ -25,19 +26,27 @@ export default class Container extends React.Component {
             });
     }
 
-    togglePopup() {
+    showPopup(){
         this.setState({ 
-            showPopup: !this.state.showPopup
+            show: true
+        });
+    }
+
+    hidePopup(){
+        this.setState({ 
+            show: false
         });
     }
 
     render(){
         return(
             <div className = "containerStyle">
-                <Fab color="primary" aria-label="add" onClick = {this.togglePopup} >
+                <Fab color="primary" aria-label="add" onClick = {this.showPopup} >
                     <AddIcon />
                 </Fab>
-                { this.state.showPopup ? <AddMemo open = {this.state.showPopup} /> : null }
+            <div>
+                { this.state.show ? <AddMemo open = {this.state.show} close = {this.hidePopup}/> : null }
+            </div>
             </div>
         )
     }
