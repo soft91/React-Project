@@ -11,6 +11,7 @@ app.use(cors());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
+// 첫 화면 초기화 시 DB 내용 불러오기
 app.get('/', function(req, res){
   connection.query('SELECT * FROM memo', function(err, rows) {
     if(err) throw err;
@@ -19,6 +20,7 @@ app.get('/', function(req, res){
   });
 });
 
+// Memo 저장
 app.post('/add', function(req, res){
   const parmas = [req.body.title, req.body.content];
 

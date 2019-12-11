@@ -1,53 +1,44 @@
 import React from 'react';
-import Fab from '@material-ui/core/Fab';
-import AddIcon from '@material-ui/icons/Add';
-import AddMemo from './AddMemo';
 import axios from 'axios';
+import CardContent from './CardContent';
 import "./Container.css";
 
-export default class Container extends React.Component {
+class Container extends React.Component {
     constructor(props){
         super(props);
 
         this.state = {
-            show: false
+            listArray: []
         }
-
-        this.showPopup = this.showPopup.bind(this);
-        this.hidePopup = this.hidePopup.bind(this);
     }
 
+    // 첫 로딩 시 등록되어 있는 데이터베이스 호출
     componentDidMount(){
         axios.get('http://localhost:4000/')
             .then(response => {
-                console.log(response.data);
+                const { listArray } = this.state;
+                this.setState({
+                    listArray: listArray.concat(...response.data)
+                })
+                console.log(this.state.listArray);
             }).catch(err => {
                 console.error('fetch failed', err);
             });
     }
 
-    showPopup(){
-        this.setState({ 
-            show: true
-        });
-    }
-
-    hidePopup(){
-        this.setState({ 
-            show: false
-        });
-    }
-
     render(){
         return(
             <div className = "containerStyle">
-                <Fab color="primary" aria-label="add" onClick = {this.showPopup} >
-                    <AddIcon />
-                </Fab>
-            <div>
-                { this.state.show ? <AddMemo open = {this.state.show} close = {this.hidePopup}/> : null }
-            </div>
+                {
+                    this.state.listArray.map((obj, index) => {
+                        return(
+                            <CardContent key = {index} title = {obj.title} content = {obj.content} />
+                        )
+                    })
+                }
             </div>
         )
     }
 }
+
+export default Container;
