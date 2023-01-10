@@ -15,13 +15,13 @@ interface Props {
 const Container = styled.div`
 	display: flex;
 	flex-direction: column;
-	gap: 10px 0px;
-	padding: 15px;
+	gap: 1rem 0;
+	padding: 1.5rem;
 `;
 
 const Title = styled.span`
 	font-weight: bold;
-	font-size: 18px;
+	font-size: 1.8rem;
 `;
 
 const TodoList = ({ todoItems, searchValue }: Props) => {

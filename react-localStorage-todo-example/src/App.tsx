@@ -1,4 +1,5 @@
 import React from "react";
+import GlobalStyle from "./globalStyled";
 import Todo from "./components/Todo";
 import styled from "styled-components";
 
@@ -7,18 +8,22 @@ const Container = styled.div`
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
-	width: 50rem;
+	height: 100%;
 	margin: 0 auto;
-	border: 1px solid black;
-	border-radius: 3px;
-	font-size: 10px;
+`;
+
+const RootDiv = styled.div`
+	height: 100vh;
 `;
 
 function App() {
 	return (
-		<Container>
-			<Todo />
-		</Container>
+		<RootDiv>
+			<GlobalStyle />
+			<Container>
+				<Todo />
+			</Container>
+		</RootDiv>
 	);
 }
 

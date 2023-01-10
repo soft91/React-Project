@@ -16,34 +16,34 @@ interface Props {
 const Container = styled.div`
 	display: flex;
 	flex-direction: column;
-	gap: 10px 0px;
-	padding: 15px;
+	gap: 1rem 0;
+	padding: 1.5rem;
 `;
 
 const Title = styled.span`
 	font-weight: bold;
-	font-size: 18px;
+	font-size: 1.8rem;
 `;
 
 const Input = styled.input`
-	height: 40px;
-	border-radius: 5px;
-	border: 1px solid #ddd;
-	padding-left: 10px;
+	height: 4rem;
+	border-radius: 0.5rem;
+	border: 0.1rem solid #ddd;
+	padding-left: 1rem;
 `;
 
 const Text = styled.span`
 	color: "#green";
-	font-size: 14px;
+	font-size: 1.4rem;
 `;
 
 const Button = styled.button`
-	height: 50px;
+	height: 5rem;
 	background-color: red;
 	border: 0;
 	border-radius: 0.5rem;
 	color: #fff;
-	font-size: 15px;
+	font-size: 1.5rem;
 `;
 
 const TodoForm = ({ addData, onChangeData, onAdd }: Props) => {

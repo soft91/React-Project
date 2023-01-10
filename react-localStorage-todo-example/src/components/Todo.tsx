@@ -13,8 +13,13 @@ interface Item {
 const Container = styled.div`
 	display: flex;
 	flex-direction: column;
-	gap: 10px 0px;
+	height: 100%;
 	width: 100%;
+
+	@media only screen and (min-width: 1200px) {
+		max-width: 1060px;
+		width: 87.8%;
+	}
 `;
 
 const ReviewComponent = () => {

@@ -14,28 +14,27 @@ interface Items {
 const Container = styled.div`
 	display: flex;
 	flex-direction: column;
-	gap: 10px 0px;
-	padding: 15px;
+	gap: 1rem 0px;
 `;
 
 const BoxContainer = styled.div`
 	display: flex;
 	border-color: #ddd;
-	border-radius: 10px;
+	border-radius: 1rem;
 	background-color: #fff;
 	flex-direction: column;
-	gap: 20px 0px;
-	padding: 50px;
-	border: 1px solid #ddd;
+	gap: 2rem 0;
+	padding: 5rem;
+	border: 0.1rem solid #ddd;
 `;
 
 const Title = styled.span`
 	font-weight: bold;
-	font-size: 18px;
+	font-size: 1.8rem;
 `;
 
 const Text = styled.span`
-	font-size: 14px;
+	font-size: 1.4rem;
 `;
 
 const TodoItem = ({ ItemData }: Items) => {
